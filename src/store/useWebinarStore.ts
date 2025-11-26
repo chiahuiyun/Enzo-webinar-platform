@@ -1,6 +1,11 @@
-import { validateAdditionalInfo, validateBasicInfo, validateCTA, ValidationErrors } from "@/lib/type"
-import { create } from "zustand"
-import { CtaTypeEnum } from "../../prisma/generated/client"
+import {
+  validateAdditionalInfo,
+  validateBasicInfo,
+  validateCTA,
+  ValidationErrors,
+} from '@/lib/type'
+import { create } from 'zustand'
+import { CtaTypeEnum } from '@prisma/client'
 
 export type WebinarFormState = {
   basicInfo: {
@@ -8,7 +13,7 @@ export type WebinarFormState = {
     description?: string
     date?: Date
     time?: string
-    timeFormat?: "AM" | "PM"
+    timeFormat?: 'AM' | 'PM'
   }
   cta: {
     ctaLabel?: string
@@ -52,16 +57,21 @@ type WebinarStore = {
   setSubmitting: (submitting: boolean) => void
 
   // Form field updaters
-  updateBasicInfoField: <K extends keyof WebinarFormState["basicInfo"]>(
+  updateBasicInfoField: <K extends keyof WebinarFormState['basicInfo']>(
     field: K,
-    value: WebinarFormState["basicInfo"][K],
+    value: WebinarFormState['basicInfo'][K]
   ) => void
 
-  updateCTAField: <K extends keyof WebinarFormState["cta"]>(field: K, value: WebinarFormState["cta"][K]) => void
-
-  updateAdditionalInfoField: <K extends keyof WebinarFormState["additionalInfo"]>(
+  updateCTAField: <K extends keyof WebinarFormState['cta']>(
     field: K,
-    value: WebinarFormState["additionalInfo"][K],
+    value: WebinarFormState['cta'][K]
+  ) => void
+
+  updateAdditionalInfoField: <
+    K extends keyof WebinarFormState['additionalInfo'],
+  >(
+    field: K,
+    value: WebinarFormState['additionalInfo'][K]
   ) => void
 
   // Tag management
@@ -78,22 +88,22 @@ type WebinarStore = {
 
 const initialState: WebinarFormState = {
   basicInfo: {
-    webinarName: "",
-    description: "",
+    webinarName: '',
+    description: '',
     date: undefined,
-    time: "",
-    timeFormat: "AM",
+    time: '',
+    timeFormat: 'AM',
   },
   cta: {
-    ctaLabel: "",
+    ctaLabel: '',
     tags: [],
-    ctaType: "BOOK_A_CALL",
-    aiAgent: "",
-    priceId:""
+    ctaType: 'BOOK_A_CALL',
+    aiAgent: '',
+    priceId: '',
   },
   additionalInfo: {
     lockChat: false,
-    couponCode: "",
+    couponCode: '',
     couponEnabled: false,
   },
 }
@@ -203,7 +213,9 @@ export const useWebinarStore = create<WebinarStore>((set, get) => ({
 
   removeTag: (tagToRemove) => {
     set((state) => {
-      const newTags = (state.formData.cta.tags || []).filter((tag) => tag !== tagToRemove)
+      const newTags = (state.formData.cta.tags || []).filter(
+        (tag) => tag !== tagToRemove
+      )
       const newCTA = {
         ...state.formData.cta,
         tags: newTags,
@@ -223,13 +235,13 @@ export const useWebinarStore = create<WebinarStore>((set, get) => ({
 
     let validationResult
     switch (stepId) {
-      case "basicInfo":
+      case 'basicInfo':
         validationResult = validateBasicInfo(formData.basicInfo)
         break
-      case "cta":
+      case 'cta':
         validationResult = validateCTA(formData.cta)
         break
-      case "additionalInfo":
+      case 'additionalInfo':
         validationResult = validateAdditionalInfo(formData.additionalInfo)
         break
     }
@@ -256,4 +268,3 @@ export const useWebinarStore = create<WebinarStore>((set, get) => ({
       validation: initialValidation,
     }),
 }))
-

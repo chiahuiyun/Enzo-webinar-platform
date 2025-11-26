@@ -15,14 +15,16 @@ const Sidebar = () => {
   const pathname = usePathname()
 
   return (
-    <div className="w-18 sm:w-24 h-screen sticky top-0 py-10 px-2 sm:px-6 border rounded-lg   bg-background border-border flex flex-col items-center justify-start gap-10">
-      <div className="">
+    <div className='w-18 sm:w-24 h-screen sticky top-0 py-10 px-2 sm:px-6 border rounded-lg   bg-background border-border flex flex-col items-center justify-start gap-10'>
+      <div className=''>
         {/* <Spotlight /> */}
-        <Link href="/"><Spotlight /></Link>
+        <Link href='/'>
+          <Spotlight />
+        </Link>
       </div>
       {/* Sidebar Menu */}
-      <div className="w-full h-full justify-between items-center flex flex-col">
-        <div className="w-full h-fit flex flex-col gap-4 items-center justify-center ">
+      <div className='w-full h-full justify-between items-center flex flex-col'>
+        <div className='w-full h-fit flex flex-col gap-4 items-center justify-center '>
           {sidebarData.map((item) => (
             <TooltipProvider key={item.id}>
               <Tooltip>
@@ -37,8 +39,8 @@ const Sidebar = () => {
                     />
                   </Link>
                 </TooltipTrigger>
-                <TooltipContent side="right">
-                  <span className="text-sm">{item.title}</span>
+                <TooltipContent side='right'>
+                  <span className='text-sm'>{item.title}</span>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

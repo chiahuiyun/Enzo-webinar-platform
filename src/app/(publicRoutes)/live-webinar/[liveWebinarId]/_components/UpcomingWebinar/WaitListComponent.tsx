@@ -1,15 +1,21 @@
-"use client"
-import React from "react"
-import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { changeAttendanceType, registerAttendee } from "@/action/attendance"
-import { toast } from "sonner"
-import { Loader2 } from "lucide-react"
-import { useAttendeeStore } from "@/store/useAttendeeStore"
-import { useRouter } from "next/navigation"
-import { WebinarStatusEnum } from "../../../../../../../prisma/generated/client"
+'use client'
+import React from 'react'
+import { useState } from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { changeAttendanceType, registerAttendee } from '@/action/attendance'
+import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
+import { useAttendeeStore } from '@/store/useAttendeeStore'
+import { useRouter } from 'next/navigation'
+import { WebinarStatusEnum } from '@prisma/client'
 
 type WaitListComponentProps = {
   webinarId: string
@@ -17,9 +23,13 @@ type WaitListComponentProps = {
   onRegistered?: () => void
 }
 
-const WaitListComponent = ({ webinarId, webinarStatus, onRegistered }: WaitListComponentProps) => {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
+const WaitListComponent = ({
+  webinarId,
+  webinarStatus,
+  onRegistered,
+}: WaitListComponentProps) => {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -36,7 +46,7 @@ const WaitListComponent = ({ webinarId, webinarStatus, onRegistered }: WaitListC
         webinarId,
       })
       if (!res.success) {
-        throw new Error(res.message || "Something went wrong!")
+        throw new Error(res.message || 'Something went wrong!')
       }
 
       // Store attendee information in the store
@@ -45,25 +55,27 @@ const WaitListComponent = ({ webinarId, webinarStatus, onRegistered }: WaitListC
           id: res.data.user.id,
           name: res.data.user.name,
           email: res.data.user.email,
-          callStatus: "PENDING",
+          callStatus: 'PENDING',
           createdAt: res.data.user.createdAt,
           updatedAt: res.data.user.updatedAt,
         })
-        if(webinarStatus === WebinarStatusEnum.LIVE) {
-          await changeAttendanceType(res.data?.attendeeId,webinarId, "ATTENDED");
+        if (webinarStatus === WebinarStatusEnum.LIVE) {
+          await changeAttendanceType(
+            res.data?.attendeeId,
+            webinarId,
+            'ATTENDED'
+          )
         }
       }
 
-     
-
       toast.success(
         webinarStatus === WebinarStatusEnum.LIVE
-          ? "Successfully joined the webinar!"
-          : "Successfully registered for webinar",
+          ? 'Successfully joined the webinar!'
+          : 'Successfully registered for webinar'
       )
 
-      setEmail("")
-      setName("")
+      setEmail('')
+      setName('')
       setSubmitted(true)
 
       // Close dialog after successful registration
@@ -78,8 +90,10 @@ const WaitListComponent = ({ webinarId, webinarStatus, onRegistered }: WaitListC
         if (onRegistered) onRegistered()
       }, 1500)
     } catch (error) {
-      console.error("Error submitting waitlist form:", error)
-      toast.error(error instanceof Error ? error.message : "Something went wrong!")
+      console.error('Error submitting waitlist form:', error)
+      toast.error(
+        error instanceof Error ? error.message : 'Something went wrong!'
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -88,13 +102,13 @@ const WaitListComponent = ({ webinarId, webinarStatus, onRegistered }: WaitListC
   const buttonText = () => {
     switch (webinarStatus) {
       case WebinarStatusEnum.SCHEDULED:
-        return "Get Reminder"
+        return 'Get Reminder'
       case WebinarStatusEnum.WAITING_ROOM:
-        return "Get Reminder"
+        return 'Get Reminder'
       case WebinarStatusEnum.LIVE:
-        return "Join Webinar"
+        return 'Join Webinar'
       default:
-        return "Register"
+        return 'Register'
     }
   }
 
@@ -103,44 +117,57 @@ const WaitListComponent = ({ webinarId, webinarStatus, onRegistered }: WaitListC
       <DialogTrigger asChild>
         <Button
           className={`${
-            webinarStatus === WebinarStatusEnum.LIVE ? "bg-red-600 hover:bg-red-700" : "bg-primary hover:bg-primary/90"
+            webinarStatus === WebinarStatusEnum.LIVE
+              ? 'bg-red-600 hover:bg-red-700'
+              : 'bg-primary hover:bg-primary/90'
           } rounded-md px-4 py-2 text-primary-foreground text-sm font-semibold`}
         >
           {webinarStatus === WebinarStatusEnum.LIVE && (
-            <span className="mr-2 h-2 w-2 bg-white rounded-full animate-pulse"></span>
+            <span className='mr-2 h-2 w-2 bg-white rounded-full animate-pulse'></span>
           )}
           {buttonText()}
         </Button>
       </DialogTrigger>
-      <DialogContent className="border-0 bg-transparent" isHideCloseButton={true}>
-        <DialogHeader className="justify-center items-center border border-input rounded-xl p-4 bg-background">
-          <DialogTitle className="text-center text-lg font-semibold mb-4">
-            {webinarStatus === WebinarStatusEnum.LIVE ? "Join the Webinar" : "Join the Waitlist"}
+      <DialogContent
+        className='border-0 bg-transparent'
+        isHideCloseButton={true}
+      >
+        <DialogHeader className='justify-center items-center border border-input rounded-xl p-4 bg-background'>
+          <DialogTitle className='text-center text-lg font-semibold mb-4'>
+            {webinarStatus === WebinarStatusEnum.LIVE
+              ? 'Join the Webinar'
+              : 'Join the Waitlist'}
           </DialogTitle>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+          <form onSubmit={handleSubmit} className='flex flex-col gap-4 w-full'>
             {!submitted && (
               <React.Fragment>
                 <Input
-                  type="text"
-                  placeholder="Your Name"
+                  type='text'
+                  placeholder='Your Name'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
                 />
                 <Input
-                  type="email"
-                  placeholder="Your Email"
+                  type='email'
+                  placeholder='Your Email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </React.Fragment>
             )}
-            <Button type="submit" className="w-full" disabled={isSubmitting || submitted}>
+            <Button
+              type='submit'
+              className='w-full'
+              disabled={isSubmitting || submitted}
+            >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="animate-spin mr-2" />{" "}
-                  {webinarStatus === WebinarStatusEnum.LIVE ? "Joining..." : "Registering..."}
+                  <Loader2 className='animate-spin mr-2' />{' '}
+                  {webinarStatus === WebinarStatusEnum.LIVE
+                    ? 'Joining...'
+                    : 'Registering...'}
                 </>
               ) : submitted ? (
                 webinarStatus === WebinarStatusEnum.LIVE ? (
@@ -149,9 +176,9 @@ const WaitListComponent = ({ webinarId, webinarStatus, onRegistered }: WaitListC
                   "You've successfully joined the waitlist!"
                 )
               ) : webinarStatus === WebinarStatusEnum.LIVE ? (
-                "Join Now"
+                'Join Now'
               ) : (
-                "Join Waitlist"
+                'Join Waitlist'
               )}
             </Button>
           </form>

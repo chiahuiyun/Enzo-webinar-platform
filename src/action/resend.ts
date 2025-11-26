@@ -1,10 +1,10 @@
-"use server";
+'use server'
 
-import { prismaClient } from "@/lib/prismaClient";
-import EmailTemplate from "@/lib/webinarStartEmailTemplate";
-import { Resend } from "resend";
+import { prismaClient } from '@/lib/prismaClient'
+import EmailTemplate from '@/lib/webinarStartEmailTemplate'
+import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export const sendBulkEmail = async (webinarId: string) => {
   try {
@@ -12,22 +12,22 @@ export const sendBulkEmail = async (webinarId: string) => {
       where: {
         webinarId: webinarId,
       },
-      include:{
+      include: {
         user: true,
-      }
-    });
+      },
+    })
 
     const res = await resend.batch.send(
       attendances.map((attendance) => ({
-        from: "Engro <adelyn@chia.dev>",
+        from: 'Engro <adelyn@chia.dev>',
         to: [attendance.user.email],
-        subject: "Webinar Has Started",
+        subject: 'Webinar Has Started',
         react: EmailTemplate({ webinarId }),
       }))
-    );
-    console.log("Email sent successfully", res);
+    )
+    console.log('Email sent successfully', res)
   } catch (error) {
-    console.log("Error sending email", error);
-   throw new Error("Error sending email");
+    console.log('Error sending email', error)
+    throw new Error('Error sending email')
   }
-};
+}

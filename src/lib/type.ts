@@ -1,4 +1,4 @@
-import { AiAgents, Attendee, User, Webinar } from "@prisma/client"
+import { AiAgents, Attendee, User, Webinar } from '@prisma/client'
 
 export type ValidationErrors = Record<string, string>
 
@@ -12,29 +12,29 @@ export const validateBasicInfo = (data: {
   description?: string
   date?: Date
   time?: string
-  timeFormat?: "AM" | "PM"
+  timeFormat?: 'AM' | 'PM'
 }): ValidationResult => {
   const errors: ValidationErrors = {}
 
   if (!data.webinarName?.trim()) {
-    errors.webinarName = "Webinar name is required"
+    errors.webinarName = 'Webinar name is required'
   }
 
   if (!data.description?.trim()) {
-    errors.description = "Description is required"
+    errors.description = 'Description is required'
   }
 
   if (!data.date) {
-    errors.date = "Date is required"
+    errors.date = 'Date is required'
   }
 
   if (!data.time?.trim()) {
-    errors.time = "Time is required"
+    errors.time = 'Time is required'
   } else {
     // Validate time format (HH:MM)
     const timeRegex = /^(0?[1-9]|1[0-2]):[0-5][0-9]$/
     if (!timeRegex.test(data.time)) {
-      errors.time = "Time must be in format HH:MM (e.g., 10:30)"
+      errors.time = 'Time must be in format HH:MM (e.g., 10:30)'
     }
   }
 
@@ -53,11 +53,11 @@ export const validateCTA = (data: {
   const errors: ValidationErrors = {}
 
   if (!data.ctaLabel?.trim()) {
-    errors.ctaLabel = "CTA label is required"
+    errors.ctaLabel = 'CTA label is required'
   }
 
   if (!data.ctaType) {
-    errors.ctaType = "Please select a CTA type"
+    errors.ctaType = 'Please select a CTA type'
   }
 
   return {
@@ -75,7 +75,7 @@ export const validateAdditionalInfo = (data: {
 
   // If coupon is enabled, code is required
   if (data.couponEnabled && !data.couponCode?.trim()) {
-    errors.couponCode = "Coupon code is required when enabled"
+    errors.couponCode = 'Coupon code is required when enabled'
   }
 
   return {
@@ -84,48 +84,41 @@ export const validateAdditionalInfo = (data: {
   }
 }
 
-
-
-
-export type WebinarStatus = "upcoming" | "live" | "ended"
-
-
+export type WebinarStatus = 'upcoming' | 'live' | 'ended'
 
 export type AttendanceData = {
-  count: number;
-  users: Attendee[];
-};
-
+  count: number
+  users: Attendee[]
+}
 
 export type ChatEvent = {
   message: {
-    id: string;
-    text: string;
-    user_id?: string;
+    id: string
+    text: string
+    user_id?: string
     user?: {
-  id: string;
-  name?: string;
-    };
-    created_at?: string;
-    type?: string;
-  };
-  type: string;
-  cid: string;
+      id: string
+      name?: string
+    }
+    created_at?: string
+    type?: string
+  }
+  type: string
+  cid: string
 }
 
 export type WebinarWithPresenter = Webinar & {
-  presenter : User
+  presenter: User
 }
 
-
 export type StreamCallRecording = {
-  filename: string;
-  url: string;
-  start_time: Date;
-  end_time: Date;
-  session_id: string;
-} 
+  filename: string
+  url: string
+  start_time: Date
+  end_time: Date
+  session_id: string
+}
 
 export type UserWithAiAgent = User & {
-  aiAgents:AiAgents[]
+  aiAgents: AiAgents[]
 }

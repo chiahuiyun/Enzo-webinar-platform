@@ -19,22 +19,22 @@ const Header = ({ assistants, stripeProducts }: Props) => {
   const router = useRouter()
 
   return (
-    <div className="w-full p-4 sticky top-5 z-10 flex justify-between items-center flex-wrap gap-4 border border-border/40 backdrop-blur-2xl rounded-full">
+    <div className='w-full p-4 sticky top-5 z-10 flex justify-between items-center flex-wrap gap-4 border border-border/40 backdrop-blur-2xl rounded-full'>
       {pathname?.includes('pipeline') ? (
         <Button
-          className="bg-primary/10 border border-border rounded-xl"
-          variant="outline"
+          className='bg-primary/10 border border-border rounded-xl'
+          variant='outline'
           onClick={() => router.push('/webinars')}
         >
           <ArrowLeft /> Back to Webinars
         </Button>
       ) : (
-        <div className="px-4 py-2 flex justify-center text-bold items-center rounded-xl bg-background border border-border text-primary capitalize">
+        <div className='px-4 py-2 flex justify-center text-bold items-center rounded-xl bg-background border border-border text-primary capitalize'>
           {pathname.split('/')[1]}
         </div>
       )}
 
-      <div className="flex gap-6 items-center flex-wrap">
+      <div className='flex gap-6 items-center flex-wrap'>
         <PurpleIcon>
           <LightningIcon />
         </PurpleIcon>

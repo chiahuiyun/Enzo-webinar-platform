@@ -183,45 +183,43 @@ const CTAStep = ({ assistants, stripeProducts }: Props) => {
         </div>
       )}
 
-      {ctaType === CtaTypeEnum.BUY_NOW && (
-        <div className='space-y-2'>
-          <Label>Attach an Product</Label>
-          <div className='relative'>
-            <div className='mb-2'>
-              <div className='relative'>
-                <Search className='absolute left-3 top-2.5 h-4 w-4 text-gray-500' />
-                <Input
-                  placeholder='Search agents'
-                  className='pl-9 !bg-background/50 border border-input'
-                />
-              </div>
+      <div className='space-y-2'>
+        <Label>Attach an Product</Label>
+        <div className='relative'>
+          <div className='mb-2'>
+            <div className='relative'>
+              <Search className='absolute left-3 top-2.5 h-4 w-4 text-gray-500' />
+              <Input
+                placeholder='Search agents'
+                className='pl-9 !bg-background/50 border border-input'
+              />
             </div>
-
-            <Select value={priceId || ''} onValueChange={handleProductChange}>
-              <SelectTrigger className='w-full !bg-background/50 border border-input'>
-                <SelectValue placeholder='Select an product' />
-              </SelectTrigger>
-              <SelectContent className='bg-background border border-input max-h-48'>
-                {stripeProducts?.length > 0 ? (
-                  stripeProducts.map((product) => (
-                    <SelectItem
-                      key={product.id}
-                      value={product?.default_price?.toString() || ''}
-                      className='!bg-background/50 hover:!bg-white/10'
-                    >
-                      {product.name}
-                    </SelectItem>
-                  ))
-                ) : (
-                  <SelectItem value='No Product Available' disabled>
-                    Create product in stripe
-                  </SelectItem>
-                )}
-              </SelectContent>
-            </Select>
           </div>
+
+          <Select value={priceId || ''} onValueChange={handleProductChange}>
+            <SelectTrigger className='w-full !bg-background/50 border border-input'>
+              <SelectValue placeholder='Select an product' />
+            </SelectTrigger>
+            <SelectContent className='bg-background border border-input max-h-48'>
+              {stripeProducts?.length > 0 ? (
+                stripeProducts.map((product) => (
+                  <SelectItem
+                    key={product.id}
+                    value={product?.default_price?.toString() || ''}
+                    className='!bg-background/50 hover:!bg-white/10'
+                  >
+                    {product.name}
+                  </SelectItem>
+                ))
+              ) : (
+                <SelectItem value='No Product Available' disabled>
+                  Create product in stripe
+                </SelectItem>
+              )}
+            </SelectContent>
+          </Select>
         </div>
-      )}
+      </div>
     </div>
   )
 }

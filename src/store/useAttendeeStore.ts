@@ -1,6 +1,6 @@
-import type { Attendee } from "@prisma/client"
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import type { Attendee } from '@prisma/client'
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 type AttendeeStore = {
   attendee: Attendee | null
@@ -17,7 +17,7 @@ export const useAttendeeStore = create<AttendeeStore>()(
       clearAttendee: () => set({ attendee: null }),
     }),
     {
-      name: "attendee-storage", // unique name for localStorage
-    },
-  ),
+      name: 'attendee-storage', // unique name for localStorage
+    }
+  )
 )

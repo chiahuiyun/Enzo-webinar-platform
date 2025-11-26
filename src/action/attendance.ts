@@ -1,14 +1,14 @@
-"use server";
-import { prismaClient } from "@/lib/prismaClient";
-import { revalidatePath } from "next/cache";
-import { AttendedTypeEnum, CallStatusEnum, CtaTypeEnum } from '../../prisma/generated/client'
-import { AttendanceData } from "@/lib/type";
+'use server'
+import { prismaClient } from '@/lib/prismaClient'
+import { revalidatePath } from 'next/cache'
+import { AttendedTypeEnum, CallStatusEnum, CtaTypeEnum } from '@prisma/client'
+import { AttendanceData } from '@/lib/type'
 
 export const getWebinarAttendance = async (
   webinarId: string,
   options: {
-    includeUsers?: boolean;
-    userLimit?: number;
+    includeUsers?: boolean
+    userLimit?: number
   } = { includeUsers: true, userLimit: 100 }
 ) => {
   try {
@@ -26,32 +26,32 @@ export const getWebinarAttendance = async (
           },
         },
       },
-    });
+    })
 
     if (!webinar) {
       return {
         success: false,
         status: 404,
-        error: "Webinar not found",
-      };
+        error: 'Webinar not found',
+      }
     }
 
     // Get attendance counts by type in a single aggregation query
     const attendanceCounts = await prismaClient.attendance.groupBy({
-      by: ["attendedType"],
+      by: ['attendedType'],
       where: {
         webinarId,
       },
       _count: {
         attendedType: true,
       },
-    });
+    })
 
     // Initialize the result structure
     const result: Record<AttendedTypeEnum, AttendanceData> = {} as Record<
       AttendedTypeEnum,
       AttendanceData
-    >;
+    >
 
     // Process the counts first - this part is very efficient
     for (const type of Object.values(AttendedTypeEnum)) {
@@ -60,14 +60,14 @@ export const getWebinarAttendance = async (
         type === AttendedTypeEnum.ADDED_TO_CART &&
         webinar.ctaType === CtaTypeEnum.BOOK_A_CALL
       )
-        continue;
+        continue
 
       // Skip BREAKOUT_ROOM for non-BOOK_A_CALL webinars
       if (
         type === AttendedTypeEnum.BREAKOUT_ROOM &&
         webinar.ctaType !== CtaTypeEnum.BOOK_A_CALL
       )
-        continue;
+        continue
 
       // Find the count for this type
       const countItem = attendanceCounts.find((item) => {
@@ -77,16 +77,16 @@ export const getWebinarAttendance = async (
           type === AttendedTypeEnum.BREAKOUT_ROOM &&
           item.attendedType === AttendedTypeEnum.ADDED_TO_CART
         ) {
-          return true;
+          return true
         }
-        return item.attendedType === type;
-      });
+        return item.attendedType === type
+      })
 
       // Initialize with count but empty users array
       result[type] = {
         count: countItem ? countItem._count.attendedType : 0,
         users: [],
-      };
+      }
     }
 
     // Fetch user data only if requested
@@ -100,7 +100,7 @@ export const getWebinarAttendance = async (
           (type === AttendedTypeEnum.BREAKOUT_ROOM &&
             webinar.ctaType !== CtaTypeEnum.BOOK_A_CALL)
         ) {
-          continue;
+          continue
         }
 
         // Get the attendance type to query (map BREAKOUT_ROOM to ADDED_TO_CART for database query)
@@ -108,7 +108,7 @@ export const getWebinarAttendance = async (
           webinar.ctaType === CtaTypeEnum.BOOK_A_CALL &&
           type === AttendedTypeEnum.BREAKOUT_ROOM
             ? AttendedTypeEnum.ADDED_TO_CART
-            : type;
+            : type
 
         // Only fetch users if there are any attendances of this type
         if (result[type].count > 0) {
@@ -122,9 +122,9 @@ export const getWebinarAttendance = async (
             },
             take: options.userLimit, // Limit the number of users returned
             orderBy: {
-              joinedAt: "desc", // Most recent first
+              joinedAt: 'desc', // Most recent first
             },
-          });
+          })
 
           // Map the attendance data to the user format we want
           result[type].users = attendances.map((attendance) => ({
@@ -132,11 +132,11 @@ export const getWebinarAttendance = async (
             name: attendance.user.name,
             email: attendance.user.email,
             attendedAt: attendance.joinedAt,
-            stripeConnectId: null, 
-            callStatus: attendance.user.callStatus, 
+            stripeConnectId: null,
+            callStatus: attendance.user.callStatus,
             createdAt: attendance.user.createdAt,
             updatedAt: attendance.user.updatedAt,
-          }));
+          }))
         }
       }
     }
@@ -147,29 +147,39 @@ export const getWebinarAttendance = async (
       ctaType: webinar.ctaType,
       webinarTags: webinar.tags || [],
       presenter: webinar.presenter,
-    };
+    }
   } catch (error) {
-    console.error("Failed to fetch attendance data:", error);
+    console.error('Failed to fetch attendance data:', error)
     return {
       success: false,
-      error: "Failed to fetch attendance data",
-    };
+      error: 'Failed to fetch attendance data',
+    }
   }
-};
+}
 
-export const registerAttendee = async ({ webinarId, email, name }:{
+export const registerAttendee = async ({
+  webinarId,
+  email,
+  name,
+}: {
   webinarId: string
   email: string
   name: string
 }) => {
   try {
     if (!webinarId || !email) {
-      return { success: false, status: 400, message: "Missing required parameters" }
+      return {
+        success: false,
+        status: 400,
+        message: 'Missing required parameters',
+      }
     }
 
-    const webinar = await prismaClient.webinar.findUnique({ where: { id: webinarId } })
+    const webinar = await prismaClient.webinar.findUnique({
+      where: { id: webinarId },
+    })
     if (!webinar) {
-      return { success: false, status: 404, message: "Webinar not found" }
+      return { success: false, status: 404, message: 'Webinar not found' }
     }
 
     // Find or create the attendee by email
@@ -189,9 +199,9 @@ export const registerAttendee = async ({ webinarId, email, name }:{
         attendeeId: attendee.id,
         webinarId: webinarId,
       },
-      include:{
-        user:true
-      }
+      include: {
+        user: true,
+      },
     })
 
     if (existingAttendance) {
@@ -199,7 +209,7 @@ export const registerAttendee = async ({ webinarId, email, name }:{
         success: true,
         status: 200,
         data: existingAttendance,
-        message: "You are already registered for this webinar",
+        message: 'You are already registered for this webinar',
       }
     }
 
@@ -210,9 +220,9 @@ export const registerAttendee = async ({ webinarId, email, name }:{
         attendeeId: attendee.id,
         webinarId: webinarId,
       },
-      include:{
-        user:true
-      }
+      include: {
+        user: true,
+      },
     })
 
     revalidatePath(`/${webinarId}`)
@@ -221,20 +231,23 @@ export const registerAttendee = async ({ webinarId, email, name }:{
       success: true,
       status: 200,
       data: attendance,
-      message: "Successfully Registered",
+      message: 'Successfully Registered',
     }
   } catch (error) {
-    console.error("Registration error:", error)
+    console.error('Registration error:', error)
     return {
       success: false,
       status: 500,
       error: error,
-      message: "Something went wrong",
+      message: 'Something went wrong',
     }
   }
 }
 
-export const checkAttendeeRegistration = async (webinarId: string, email: string) => {
+export const checkAttendeeRegistration = async (
+  webinarId: string,
+  email: string
+) => {
   try {
     // Check if user is already registered
     const existingAttendee = await prismaClient.attendee.findFirst({
@@ -253,7 +266,7 @@ export const checkAttendeeRegistration = async (webinarId: string, email: string
       isRegistered: !!existingAttendee,
     }
   } catch (error) {
-    console.error("Error checking registration:", error)
+    console.error('Error checking registration:', error)
     return {
       success: false,
       isRegistered: false,
@@ -262,7 +275,11 @@ export const checkAttendeeRegistration = async (webinarId: string, email: string
   }
 }
 
-export const updateAttendanceStatus = async (attendeeId: string, webinarId: string, attendedType: AttendedTypeEnum) => {
+export const updateAttendanceStatus = async (
+  attendeeId: string,
+  webinarId: string,
+  attendedType: AttendedTypeEnum
+) => {
   try {
     const attendance = await prismaClient.attendance.findFirst({
       where: {
@@ -294,7 +311,7 @@ export const updateAttendanceStatus = async (attendeeId: string, webinarId: stri
       success: true,
     }
   } catch (error) {
-    console.error("Error updating attendance status:", error)
+    console.error('Error updating attendance status:', error)
     return {
       success: false,
       error,
@@ -303,79 +320,83 @@ export const updateAttendanceStatus = async (attendeeId: string, webinarId: stri
 }
 
 //get Attendee by Id
-export const getAttendeeById = async (id: string, webinarId:string) => {
+export const getAttendeeById = async (id: string, webinarId: string) => {
   try {
     const attendee = await prismaClient.attendee.findUnique({
       where: {
         id,
       },
-    });
+    })
 
     const attendance = await prismaClient.attendance.findFirst({
       where: {
         attendeeId: id,
         webinarId: webinarId,
       },
-    });
+    })
 
     if (!attendee || !attendance) {
       return {
         status: 404,
         success: false,
-        message: "Attendee not found",
-      };
+        message: 'Attendee not found',
+      }
     }
 
     return {
       status: 200,
       success: true,
-      message: "Get attendee details successful",
+      message: 'Get attendee details successful',
       data: attendee,
-    };
+    }
   } catch (error) {
-    console.log("Error", error);
+    console.log('Error', error)
     return {
-      status:500,
+      status: 500,
       success: false,
-      message: "Something went wrong!"
+      message: 'Something went wrong!',
     }
   }
-};
+}
 
 // change call status
-export const changeCallStatus = async (attendeeId: string, callStatus: CallStatusEnum) => {
-  try{
+export const changeCallStatus = async (
+  attendeeId: string,
+  callStatus: CallStatusEnum
+) => {
+  try {
     const attendee = await prismaClient.attendee.update({
       where: {
         id: attendeeId,
       },
-      data:{
+      data: {
         callStatus: callStatus,
-
-      }
+      },
     })
 
     return {
       success: true,
       status: 200,
-      message: "Call status updated successfully",
+      message: 'Call status updated successfully',
       data: attendee,
     }
-
-  }catch(error){
-    console.error("Error updating call status:", error)
+  } catch (error) {
+    console.error('Error updating call status:', error)
     return {
       success: false,
       status: 500,
-      message: "Failed to update call status",
+      message: 'Failed to update call status',
       error,
     }
   }
 }
 
-
 // change Attendance type
-export const changeAttendanceType = async (attendeeId: string, webinarId: string, attendedType: AttendedTypeEnum) => {
+export const changeAttendanceType = async (
+  attendeeId: string,
+  webinarId: string,
+  attendedType: AttendedTypeEnum
+) => {
   try {
     const attendance = await prismaClient.attendance.update({
       where: {
@@ -387,21 +408,21 @@ export const changeAttendanceType = async (attendeeId: string, webinarId: string
       data: {
         attendedType,
       },
-    });
+    })
 
     return {
       success: true,
       status: 200,
-      message: "Attendance type updated successfully",
+      message: 'Attendance type updated successfully',
       data: attendance,
-    };
+    }
   } catch (error) {
-    console.error("Error updating attendance type:", error);
+    console.error('Error updating attendance type:', error)
     return {
       success: false,
       status: 500,
-      message: "Failed to update attendance type",
+      message: 'Failed to update attendance type',
       error,
-    };
+    }
   }
-};
+}

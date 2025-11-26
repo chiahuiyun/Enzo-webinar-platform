@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-import { changeWebinarStatus } from "@/action/webinar";
-import { WebinarStatusEnum } from "@prisma/client";
+import { useEffect, useState } from 'react'
+import { cn } from '@/lib/utils'
+import { changeWebinarStatus } from '@/action/webinar'
+import { WebinarStatusEnum } from '@prisma/client'
 
 interface Props {
-  targetDate: Date;
-  className?: string;
-  webinarId: string;
-  webinarStatus: WebinarStatusEnum;
+  targetDate: Date
+  className?: string
+  webinarId: string
+  webinarStatus: WebinarStatusEnum
 }
 
 const CountdownTimer = ({
@@ -24,32 +24,32 @@ const CountdownTimer = ({
     minutes: 0,
     seconds: 0,
     milliseconds: 0,
-  });
+  })
 
-  const [isExpired, setIsExpired] = useState(false);
+  const [isExpired, setIsExpired] = useState(false)
 
   // Format numbers to always have two digits
-  const formatNumber = (num: number) => num.toString().padStart(2, "0");
+  const formatNumber = (num: number) => num.toString().padStart(2, '0')
 
   // Split a number into individual digits for display
   const splitDigits = (num: number) => {
-    const formatted = formatNumber(num);
-    return [formatted.charAt(0), formatted.charAt(1)];
-  };
+    const formatted = formatNumber(num)
+    return [formatted.charAt(0), formatted.charAt(1)]
+  }
 
-  const [days1, days2] = splitDigits(timeLeft.days > 99 ? 99 : timeLeft.days);
-  const [hours1, hours2] = splitDigits(timeLeft.hours);
-  const [minutes1, minutes2] = splitDigits(timeLeft.minutes);
-  const [seconds1, seconds2] = splitDigits(timeLeft.seconds);
+  const [days1, days2] = splitDigits(timeLeft.days > 99 ? 99 : timeLeft.days)
+  const [hours1, hours2] = splitDigits(timeLeft.hours)
+  const [minutes1, minutes2] = splitDigits(timeLeft.minutes)
+  const [seconds1, seconds2] = splitDigits(timeLeft.seconds)
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
+      const now = new Date()
+      const difference = targetDate.getTime() - now.getTime()
 
       if (difference <= 0) {
         if (!isExpired) {
-          setIsExpired(true);
+          setIsExpired(true)
 
           if (webinarStatus === WebinarStatusEnum.SCHEDULED) {
             const updateStatus = async () => {
@@ -57,14 +57,13 @@ const CountdownTimer = ({
                 await changeWebinarStatus(
                   webinarId,
                   WebinarStatusEnum.WAITING_ROOM
-                );
+                )
               } catch (err) {
-                console.error(err);
+                console.error(err)
               }
-            };
+            }
             // Call the async function separately
-            updateStatus();
-      
+            updateStatus()
           }
         }
 
@@ -74,7 +73,7 @@ const CountdownTimer = ({
           minutes: 0,
           seconds: 0,
           milliseconds: 0,
-        };
+        }
       }
 
       return {
@@ -83,68 +82,68 @@ const CountdownTimer = ({
         minutes: Math.floor((difference / (1000 * 60)) % 60),
         seconds: Math.floor((difference / 1000) % 60),
         milliseconds: difference % 1000,
-      };
-    };
+      }
+    }
 
     // Initial calculation
-    setTimeLeft(calculateTimeLeft());
+    setTimeLeft(calculateTimeLeft())
 
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 50);
+      setTimeLeft(calculateTimeLeft())
+    }, 50)
 
-    return () => clearInterval(timer);
-  }, [targetDate, isExpired, webinarId, webinarStatus]);
+    return () => clearInterval(timer)
+  }, [targetDate, isExpired, webinarId, webinarStatus])
 
   return (
-    <div className={cn("text-center", className)}>
+    <div className={cn('text-center', className)}>
       {!isExpired && (
-        <div className="flex items-center justify-center gap-4 mb-8">
+        <div className='flex items-center justify-center gap-4 mb-8'>
           {timeLeft.days > 0 && (
-            <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">Days</p>
-              <div className="flex justify-center gap-1">
-                <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+            <div className='space-y-2'>
+              <p className='text-sm text-muted-foreground'>Days</p>
+              <div className='flex justify-center gap-1'>
+                <div className='bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl'>
                   {days1}
                 </div>
-                <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+                <div className='bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl'>
                   {days2}
                 </div>
               </div>
             </div>
           )}
 
-          <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">Hours</p>
-            <div className="flex justify-center gap-1">
-              <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+          <div className='space-y-2'>
+            <p className='text-sm text-muted-foreground'>Hours</p>
+            <div className='flex justify-center gap-1'>
+              <div className='bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl'>
                 {hours1}
               </div>
-              <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+              <div className='bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl'>
                 {hours2}
               </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">Minutes</p>
-            <div className="flex justify-center gap-1">
-              <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+          <div className='space-y-2'>
+            <p className='text-sm text-muted-foreground'>Minutes</p>
+            <div className='flex justify-center gap-1'>
+              <div className='bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl'>
                 {minutes1}
               </div>
-              <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+              <div className='bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl'>
                 {minutes2}
               </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">Seconds</p>
-            <div className="flex justify-center gap-1">
-              <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+          <div className='space-y-2'>
+            <p className='text-sm text-muted-foreground'>Seconds</p>
+            <div className='flex justify-center gap-1'>
+              <div className='bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl'>
                 {seconds1}
               </div>
-              <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+              <div className='bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl'>
                 {seconds2}
               </div>
             </div>
@@ -152,7 +151,7 @@ const CountdownTimer = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CountdownTimer;
+export default CountdownTimer

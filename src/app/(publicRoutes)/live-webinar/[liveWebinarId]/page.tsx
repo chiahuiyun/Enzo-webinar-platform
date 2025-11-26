@@ -2,7 +2,7 @@ import { getWebinarById } from '@/action/webinar'
 import { onAuthenticateUser } from '@/action/auth'
 import RenderWebinar from './_components/Common/RenderWebinar'
 import { WebinarWithPresenter } from '@/lib/type'
-import { getStreamRecording } from '@/action/stremIo'
+import { getStreamRecording } from '@/action/streamIo'
 
 type Props = {
   params: Promise<{

@@ -1,13 +1,11 @@
-import React from "react";
+import React from 'react'
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 const layout = ({ children }: Props) => {
-  return (
-    <div className="w-full container mx-auto min-h-screen">{children}</div>
-  );
-};
+  return <div className='w-full container mx-auto min-h-screen'>{children}</div>
+}
 
-export default layout;
+export default layout

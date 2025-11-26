@@ -1,6 +1,8 @@
-import { AttendedTypeEnum, CtaTypeEnum } from "../../../../../../../prisma/generated/client"
+import { AttendedTypeEnum, CtaTypeEnum } from '@prisma/client'
 
-export const getColumnsForCtaType = (ctaType: CtaTypeEnum): AttendedTypeEnum[] => {
+export const getColumnsForCtaType = (
+  ctaType: CtaTypeEnum
+): AttendedTypeEnum[] => {
   // Common columns for both CTA types
   const commonColumns = [
     AttendedTypeEnum.REGISTERED,
@@ -20,7 +22,7 @@ export const getColumnsForCtaType = (ctaType: CtaTypeEnum): AttendedTypeEnum[] =
 
 export const formatColumnTitle = (columnType: AttendedTypeEnum): string => {
   return columnType
-    .split("_")
+    .split('_')
     .map((word) => word.charAt(0) + word.slice(1).toLowerCase())
-    .join(" ")
+    .join(' ')
 }

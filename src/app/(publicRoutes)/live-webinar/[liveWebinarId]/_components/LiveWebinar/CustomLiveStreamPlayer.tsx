@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   Call,
   StreamCall,
   useStreamVideoClient,
-} from "@stream-io/video-react-sdk";
-import LiveWebinarView from "../Common/LiveWebinarView";
-import { WebinarWithPresenter } from "@/lib/type";
+} from '@stream-io/video-react-sdk'
+import LiveWebinarView from '../Common/LiveWebinarView'
+import { WebinarWithPresenter } from '@/lib/type'
 
 type Props = {
-  username: string;
-  callId: string;
-  callType: string;
-  webinar: WebinarWithPresenter;
-  token: string;
-};
+  username: string
+  callId: string
+  callType: string
+  webinar: WebinarWithPresenter
+  token: string
+}
 
 const CustomLivestreamPlayer = ({
   callId,
@@ -22,25 +22,24 @@ const CustomLivestreamPlayer = ({
   username,
   token,
 }: Props) => {
-  const client = useStreamVideoClient();
-  const [call, setCall] = useState<Call>();
-  const [showChat, setShowChat] = useState(true);
-
+  const client = useStreamVideoClient()
+  const [call, setCall] = useState<Call>()
+  const [showChat, setShowChat] = useState(true)
 
   useEffect(() => {
-    if (!client) return;
-    const myCall = client.call(callType, callId);
-    setCall(myCall);
+    if (!client) return
+    const myCall = client.call(callType, callId)
+    setCall(myCall)
     myCall.join({ create: true }).then(
       () => setCall(myCall),
-      () => console.error("Failed to join the call"),
-    );
-    return () => {     
-      setCall(undefined);
-    };
-  }, [client, callId, callType]);
+      () => console.error('Failed to join the call')
+    )
+    return () => {
+      setCall(undefined)
+    }
+  }, [client, callId, callType])
 
-  if (!call) return null;
+  if (!call) return null
   return (
     <StreamCall call={call}>
       <LiveWebinarView
@@ -54,7 +53,7 @@ const CustomLivestreamPlayer = ({
         call={call}
       />
     </StreamCall>
-  );
-};
+  )
+}
 
-export default CustomLivestreamPlayer;
+export default CustomLivestreamPlayer
