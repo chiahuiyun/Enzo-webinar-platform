@@ -248,7 +248,7 @@ export default function HeroGeometric() {
             </p>
           </motion.div>
           
-          <div className='/about'>
+          <div>
           <motion.div
             custom={5}
             variants={fadeUpVariants}

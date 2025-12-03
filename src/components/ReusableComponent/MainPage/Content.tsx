@@ -5,7 +5,7 @@ const Content = () => {
   return (
     <div>
       <div className='max-w-7xl mx-auto py-24'>
-        <div className='text-center mb-16'>
+        <div className='text-center mb-16' id='about'>
             <h2
               className='text-4xl md:text-5xl font-bold mb-8'
               style={{
@@ -88,7 +88,7 @@ const Content = () => {
       </div>
 
       {/* Features Section - More professional */}
-      <div className='features-section relative bg-black py-24 px-4'>
+      <div className='features-section relative bg-black py-24 px-4' id='features'>
         <div className='max-w-7xl mx-auto'>
           <div className='text-center mb-16'>
             <h2

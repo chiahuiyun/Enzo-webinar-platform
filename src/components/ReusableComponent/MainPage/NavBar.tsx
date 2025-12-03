@@ -3,7 +3,7 @@ import { navLinks } from '@/lib/data'
 
 const NavBar = () => {
   return (
-    <header className="sticky top-20 z-50 backdrop-blur-md">
+    <header className="sticky items-center text-center top-20 z-50 backdrop-blur-md">
       <nav className="flex items-center justify-between w-full h-10 px-8 gap-20">
         
         <Spotlight />

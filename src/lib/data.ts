@@ -6,22 +6,22 @@ import { UserSearch, QrCode, Sparkle, Sparkles, Webcam } from 'lucide-react'
 
 export const navLinks = [
   {
-    id: 1,
+    id: 'about',
     title: 'About',
     icon: QrCode,
-    link: '/about',
+    link: 'about',
   },
   {
-    id: 2,
+    id: 'features',
     title: 'Features',
     icon: Sparkles,
-    link: '/features',
+    link: 'features',
   },
   {
-    id: 3,
+    id: 'contact',
     title: 'Contact',
     icon: UserSearch,
-    link: '/contact',
+    link: 'contact',
   },
 ]
 export const footerLinks = [
