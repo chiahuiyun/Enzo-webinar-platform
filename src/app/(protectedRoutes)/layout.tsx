@@ -20,7 +20,7 @@ const Layout = async ({ children }: Props) => {
   }
   const user = userExist.user as UserWithAiAgent
   const stripeProducts = await getAllProductsFromStripe()
-  const assistants = await getAllAssistants()
+  // const assistants = await getAllAssistants()
 
   return (
     <div className='flex w-full min-h-screen'>

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -6,26 +7,28 @@ const Content = () => {
     <div>
       <div className='max-w-7xl mx-auto py-24'>
         <div className='text-center mb-16' id='about'>
-            <h2
-              className='text-4xl md:text-5xl font-bold mb-8'
-              style={{
-                fontFamily: 'var(--font-orbitron), system-ui, sans-serif',
-                background:
-                  'linear-gradient(to right, rgb(192,132,252), rgb(79,209,197))',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              How Enzo Help Your Business?
-            </h2>
-          </div>
+          <h2
+            className='text-4xl md:text-5xl font-bold mb-8'
+            style={{
+              fontFamily: 'var(--font-orbitron), system-ui, sans-serif',
+              background:
+                'linear-gradient(to right, rgb(192,132,252), rgb(79,209,197))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            How Enzo Help Your Business?
+          </h2>
+        </div>
       </div>
       <div className='flex-1 flex justify-center items-center'>
         {/* Crystal Object with simpler, more professional styling */}
         <div className='relative' style={{ perspective: 1000 }}>
-          <img
+          <Image
             src='/crystal.png'
             alt='AI Crystal'
+            width={500}
+            height={500}
             className='w-full max-w-md object-contain'
             style={{
               boxShadow: '0 0 30px rgba(79, 209, 197, 0.2)',
@@ -42,7 +45,7 @@ const Content = () => {
           <div className='absolute bottom-1/4 left-0 transform -translate-x-1/2 px-3 py-1 bg-teal-500/20 backdrop-blur-sm rounded-sm text-xs text-white'>
             Smart Automation
           </div>
-          <div className='absolute bottom-0 right-0 transform translate-x-1/3 translate-y-1/3 px-3 py-1 bg-indigo-500/20 backdrop-blur-sm rounded-sm text-xs text-white'>
+          <div className='absolute bottom-2 right-0 transform translate-x-1/3 translate-y-1/3 px-3 py-1 bg-indigo-500/20 backdrop-blur-sm rounded-sm text-xs text-white'>
             Engagement Tools
           </div>
         </div>
@@ -88,7 +91,10 @@ const Content = () => {
       </div>
 
       {/* Features Section - More professional */}
-      <div className='features-section relative bg-black py-24 px-4' id='features'>
+      <div
+        className='features-section relative bg-black py-24 px-4'
+        id='features'
+      >
         <div className='max-w-7xl mx-auto'>
           <div className='text-center mb-16'>
             <h2
@@ -118,7 +124,8 @@ const Content = () => {
                 Live AI Assistance
               </h3>
               <p className='text-gray-300'>
-                Real-time AI-powered assistance to answer attendee questions and provide insights during your webinar.
+                Real-time AI-powered assistance to answer attendee questions and
+                provide insights during your webinar.
               </p>
             </div>
 
@@ -130,7 +137,8 @@ const Content = () => {
                 Advanced Analytics
               </h3>
               <p className='text-gray-300'>
-                Comprehensive analytics dashboard with engagement metrics, attendee behavior, and conversion tracking.
+                Comprehensive analytics dashboard with engagement metrics,
+                attendee behavior, and conversion tracking.
               </p>
             </div>
 
@@ -142,7 +150,8 @@ const Content = () => {
                 Interactive Engagement
               </h3>
               <p className='text-gray-300'>
-                Polls, Q&A sessions, breakout rooms, and interactive elements to keep your audience engaged.
+                Polls, Q&A sessions, breakout rooms, and interactive elements to
+                keep your audience engaged.
               </p>
             </div>
 
@@ -167,7 +176,8 @@ const Content = () => {
                 Automated Follow-ups
               </h3>
               <p className='text-gray-300'>
-                Intelligent follow-up system that sends personalized content based on attendee engagement.
+                Intelligent follow-up system that sends personalized content
+                based on attendee engagement.
               </p>
             </div>
 
@@ -179,7 +189,8 @@ const Content = () => {
                 White-label Solution
               </h3>
               <p className='text-gray-300'>
-                Full white-label solution with custom branding options to match your company's identity.
+                Full white-label solution with custom branding options to match
+                your company identity.
               </p>
             </div>
           </div>
