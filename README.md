@@ -1,10 +1,10 @@
-# Engro
+# Enzo
 
-Engro is a sophisticated, all-in-one platform for creating, hosting, and monetizing live webinars and virtual events. It leverages a modern tech stack to provide presenters with tools for audience engagement, lead tracking, automated follow-ups, and AI-powered interactions.
+Enzo is a sophisticated, all-in-one platform for creating, hosting, and monetizing live webinars and virtual events. It leverages a modern tech stack to provide presenters with tools for audience engagement, lead tracking, automated follow-ups, and AI-powered interactions.
 
 ## 🚀 Features
 
-Based on the application's structure and data models, Engro includes the following core functionalities:
+Based on the application's structure and data models, Enzo includes the following core functionalities:
 
 * **Webinar Management:** Create, schedule, and manage webinars with statuses like `SCHEDULED`, `WAITING_ROOM`, `LIVE`, `ENDED`, and `CANCELLED`.
 * **Live Streaming:** Utilize Stream.io for real-time video and chat capabilities to host live events.

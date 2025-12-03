@@ -12,9 +12,9 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: 'Engro-Webinar Platform',
+  title: 'Enzo-Webinar Platform',
   description:
-    'Engro is an advanced AI-powered webinar platform for marketers and business ownerswhere it enables seamless webinar creation, hosting, and monetization with interactive AI-powered features.',
+    'Enzo is an advanced AI-powered webinar platform for marketers and business ownerswhere it enables seamless webinar creation, hosting, and monetization with interactive AI-powered features.',
 }
 
 export default function RootLayout({

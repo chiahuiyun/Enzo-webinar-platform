@@ -9,6 +9,10 @@ import { cn } from '@/lib/utils'
 
 import { Pacifico } from 'next/font/google'
 import { Button } from '@/components/ui/button'
+import NavBar from '@/components/ReusableComponent/MainPage/NavBar'
+import Spotlight from '@/icons/Spotlight'
+import Footer from '@/components/ReusableComponent/MainPage/Footer'
+import Content from '@/components/ReusableComponent/MainPage/Content'
 
 const pacifico = Pacifico({
   subsets: ['latin'],
@@ -86,9 +90,9 @@ function ElegantShape({
   )
 }
 
-const badge = 'By Engro'
+const badge = 'By Enzo'
 const title1 = 'Welcome To'
-const title2 = 'Engro'
+const title2 = 'Enzo'
 
 export default function HeroGeometric() {
   const fadeUpVariants = {
@@ -162,6 +166,17 @@ export default function HeroGeometric() {
             variants={fadeUpVariants}
             initial='hidden'
             animate='visible'
+            className='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12'
+          >
+            <NavBar />
+          </motion.div>
+        </div>
+        <div className='max-w-3xl mx-auto text-center'>
+          <motion.div
+            custom={1}
+            variants={fadeUpVariants}
+            initial='hidden'
+            animate='visible'
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             className='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12'
@@ -176,7 +191,7 @@ export default function HeroGeometric() {
           </motion.div>
 
           <motion.div
-            custom={1}
+            custom={2}
             variants={fadeUpVariants}
             initial='hidden'
             animate='visible'
@@ -198,7 +213,7 @@ export default function HeroGeometric() {
           </motion.div>
 
           <motion.div
-            custom={2}
+            custom={3}
             variants={fadeUpVariants}
             initial='hidden'
             animate='visible'
@@ -216,7 +231,7 @@ export default function HeroGeometric() {
           </motion.div>
 
           <motion.div
-            custom={3}
+            custom={4}
             variants={fadeUpVariants}
             initial='hidden'
             animate='visible'
@@ -231,6 +246,34 @@ export default function HeroGeometric() {
               provides personalized follow-ups. This boosts conversion rates and
               automates the sales process efficiently.
             </p>
+          </motion.div>
+          
+          <div className='/about'>
+          <motion.div
+            custom={5}
+            variants={fadeUpVariants}
+            initial='hidden'
+            animate='visible'
+            style={{
+              marginTop: '20px',
+            }}
+          >
+            <Content />
+          </motion.div>
+          </div>
+        </div>
+
+        <div className='flex flex-col text-center items-center py-20 max-w-3xl mx-auto text-muted-foreground/50 '>
+          <motion.div
+            custom={6}
+            variants={fadeUpVariants}
+            initial='hidden'
+            animate='visible'
+            style={{
+              marginTop: '20px',
+            }}
+          >
+            <Footer />
           </motion.div>
         </div>
       </div>

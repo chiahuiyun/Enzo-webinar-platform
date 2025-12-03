@@ -2,7 +2,54 @@ import HomeIcon from '@/icons/HomeIcon'
 import LeadIcon from '@/icons/LeadIcon'
 import SettingsIcon from '@/icons/SettingsIcon'
 import { CallStatusEnum } from '@prisma/client'
-import { Sparkle, Webcam } from 'lucide-react'
+import { UserSearch, QrCode, Sparkle, Sparkles, Webcam } from 'lucide-react'
+
+export const navLinks = [
+  {
+    id: 1,
+    title: 'About',
+    icon: QrCode,
+    link: '/about',
+  },
+  {
+    id: 2,
+    title: 'Features',
+    icon: Sparkles,
+    link: '/features',
+  },
+  {
+    id: 3,
+    title: 'Contact',
+    icon: UserSearch,
+    link: '/contact',
+  },
+]
+export const footerLinks = [
+  {
+    id: 1,
+    title: 'Privacy Policy',
+    // icon: QrCode,
+    link: '#',
+  },
+  {
+    id: 2,
+    title: 'Terms of Use',
+    // icon: Sparkles,
+    link: '#',
+  },
+  {
+    id: 3,
+    title: 'Sales Policy',
+    // icon: UserSearch,
+    link: '#',
+  },
+  {
+    id: 4,
+    title: 'Legal',
+    // icon: UserSearch,
+    link: '#',
+  },
+]
 
 export const sidebarData = [
   {
