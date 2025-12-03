@@ -1,6 +1,5 @@
 import { onAuthenticateUser } from '@/action/auth'
 import { getAllProductsFromStripe } from '@/action/stripe'
-import { getAllAssistants } from '@/action/vapi'
 import Header from '@/components/ReusableComponent/LayoutComponents/Header'
 import Sidebar from '@/components/ReusableComponent/LayoutComponents/Sidebar'
 import { UserWithAiAgent } from '@/lib/type'

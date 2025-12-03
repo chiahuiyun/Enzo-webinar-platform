@@ -1,4 +1,3 @@
-import Spotlight from '@/icons/Spotlight'
 import { footerLinks } from '@/lib/data'
 
 const Footer = () => {
