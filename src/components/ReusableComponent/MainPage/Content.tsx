@@ -197,7 +197,7 @@ const Content = () => {
               </h3>
               <p className='text-gray-300'>
                 Full white-label solution with custom branding options to match
-                your company identity.
+                your company&apos;s identity.
               </p>
             </div>
           </div>
@@ -289,8 +289,8 @@ const Content = () => {
                   ))}
                 </div>
                 <p className='text-gray-300'>
-                  "The AI-powered features have revolutionized our webinar
-                  strategy. We've seen a 40% increase in attendee engagement."
+                  &quot;The AI-powered features have revolutionized our webinar
+                  strategy. We've seen a 40% increase in attendee engagement.&quot;
                 </p>
               </div>
 
@@ -317,9 +317,9 @@ const Content = () => {
                   ))}
                 </div>
                 <p className='text-gray-300'>
-                  "As an educational institution, we needed a reliable and
+                  &quot;As an educational institution, we needed a reliable and
                   scalable solution. This platform has exceeded our
-                  expectations."
+                  expectations.&quot;
                 </p>
               </div>
 
@@ -346,9 +346,9 @@ const Content = () => {
                   ))}
                 </div>
                 <p className='text-gray-300'>
-                  "The analytics capabilities are incredible. Being able to see
+                  &quot;The analytics capabilities are incredible. Being able to see
                   real-time engagement metrics has transformed our sales
-                  process."
+                  process.&quot;
                 </p>
               </div>
 

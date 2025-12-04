@@ -8,7 +8,6 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 import { Pacifico } from 'next/font/google'
-import { Button } from '@/components/ui/button'
 import NavBar from '@/components/ReusableComponent/MainPage/NavBar'
 import Footer from '@/components/ReusableComponent/MainPage/Footer'
 import Content from '@/components/ReusableComponent/MainPage/Content'
