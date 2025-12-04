@@ -5,7 +5,7 @@ const Footer = () => {
     <footer>
       <hr />
 
-      <div className='text-white p-10' id='contact'>
+      <div className='text-white p-10'>
         <p>
           If you have any enquiries, please fell free to contact us via our
           official email.
@@ -14,7 +14,7 @@ const Footer = () => {
         </p>
       </div>
 
-      <div className='links'>
+      <div className='bottom-0'>
         <p>Copyright © 2025 Enzo Inc. All rights reserved.</p>
 
         <ul>

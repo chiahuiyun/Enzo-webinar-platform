@@ -2,7 +2,7 @@ import HomeIcon from '@/icons/HomeIcon'
 import LeadIcon from '@/icons/LeadIcon'
 import SettingsIcon from '@/icons/SettingsIcon'
 import { CallStatusEnum } from '@prisma/client'
-import { UserSearch, QrCode, Sparkle, Sparkles, Webcam } from 'lucide-react'
+import { UserSearch, QrCode, Sparkle, Sparkles, Webcam, Medal } from 'lucide-react'
 
 export const navLinks = [
   {
@@ -22,6 +22,12 @@ export const navLinks = [
     title: 'Contact',
     icon: UserSearch,
     link: 'contact',
+  },
+  {
+    id: 'testimonials',
+    title: 'Testimonials',
+    icon: Medal,
+    link: 'testimonials',
   },
 ]
 export const footerLinks = [

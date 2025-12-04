@@ -158,7 +158,7 @@ export default function HeroGeometric() {
         />
       </div>
 
-      <div className='relative z-10 container mx-auto px-4 md:px-6'>
+      <div className='relative z-10 container mx-auto px-4 top-10 md:px-6'>
         <div className='max-w-3xl mx-auto text-center'>
           <motion.div
             custom={0}
@@ -217,15 +217,45 @@ export default function HeroGeometric() {
             initial='hidden'
             animate='visible'
           >
-            <p className='text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4'>
+            <p className='text-base sm:text-lg md:text-xl text-gray-300 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4'>
               Crafting exceptional digital experiences through innovative design
               and cutting-edge technology.
             </p>
             <div className='flex items-center justify-center flex-col'>
-              {/* <Waitlist signInUrl="/sign-in" /> */}
-              <Button className='w-100 relative '>
-                <Link href='/sign-in'> Sign In</Link>
-              </Button>
+
+              {/* CTA Section - More professional */}
+              <div className='relative bg-black px-4 py-10'>
+                <div className='max-w-5xl mx-auto relative'>
+                  <div className='p-12 md:p-16 rounded-lg border border-purple-500/20 bg-black/50 relative'>
+                    <div className='text-center relative z-10'>
+                      <h2
+                        className='text-3xl sm:text-4xl font-bold mb-6'
+                        style={{
+                          fontFamily:
+                            'var(--font-orbitron), system-ui, sans-serif',
+                          background:
+                            'linear-gradient(to right, rgb(192,132,252), rgb(79,209,197))',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                        }}
+                      >
+                        Ready to Transform Your Webinars?
+                      </h2>
+                      <p className='text-gray-300 text-lg max-w-3xl mx-auto mb-10'>
+                        Join thousands of businesses that have revolutionized
+                        their online events with our enterprise webinar
+                        platform.
+                      </p>
+
+                      <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+                        <button className='px-10 py-4 text-lg font-semibold text-white rounded-md bg-gradient-to-r from-purple-600/80 to-blue-600/80 hover:from-purple-600 hover:to-blue-600 transition-all duration-300'>
+                          <Link href='/sign-up'>Get Started Now</Link>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -238,27 +268,21 @@ export default function HeroGeometric() {
               marginTop: '20px',
             }}
           >
-            <p className='text-muted-foreground/50'>
-              A SaaS webinar platform with an AI sales agent lets businesses
-              host live or automated webinars while engaging attendees in real
-              time. The AI agent answers questions, qualifies leads, and
-              provides personalized follow-ups. This boosts conversion rates and
-              automates the sales process efficiently.
-            </p>
+            
           </motion.div>
-          
+
           <div>
-          <motion.div
-            custom={5}
-            variants={fadeUpVariants}
-            initial='hidden'
-            animate='visible'
-            style={{
-              marginTop: '20px',
-            }}
-          >
-            <Content />
-          </motion.div>
+            <motion.div
+              custom={5}
+              variants={fadeUpVariants}
+              initial='hidden'
+              animate='visible'
+              style={{
+                marginTop: '20px',
+              }}
+            >
+              <Content />
+            </motion.div>
           </div>
         </div>
 
