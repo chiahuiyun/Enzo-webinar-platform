@@ -196,8 +196,7 @@ const Content = () => {
                 White-label Solution
               </h3>
               <p className='text-gray-300'>
-                Full white-label solution with custom branding options to match
-                your company&apos;s identity.
+                Full white-label solution with custom branding options to match your company&apos;s identity.
               </p>
             </div>
           </div>
@@ -233,9 +232,7 @@ const Content = () => {
           </div>
           <div className='md:w-1/2 text-white'>
             <p className='mb-6 text-lg text-gray-300 leading-relaxed'>
-              Our enterprise platform integrates advanced AI technology to
-              enhance every aspect of your webinar experience, from preparation
-              to follow-up.
+              Our enterprise platform integrates advanced AI technology to enhance every aspect of your webinar experience, from preparation to follow-up.
             </p>
             <p className='mb-6 text-lg text-gray-300 leading-relaxed'>
               With enterprise-grade security, scalability, and dedicated
@@ -289,8 +286,7 @@ const Content = () => {
                   ))}
                 </div>
                 <p className='text-gray-300'>
-                  &quot;The AI-powered features have revolutionized our webinar
-                  strategy. We've seen a 40% increase in attendee engagement.&quot;
+                  &quot;The AI-powered features have revolutionized our webinar strategy. We&apos;ve seen a 40% increase in attendee engagement.&quot;
                 </p>
               </div>
 
@@ -317,9 +313,7 @@ const Content = () => {
                   ))}
                 </div>
                 <p className='text-gray-300'>
-                  &quot;As an educational institution, we needed a reliable and
-                  scalable solution. This platform has exceeded our
-                  expectations.&quot;
+                  &quot;As an educational institution, we needed a reliable and scalable solution. This platform has exceeded our expectations.&quot;
                 </p>
               </div>
 
@@ -346,9 +340,7 @@ const Content = () => {
                   ))}
                 </div>
                 <p className='text-gray-300'>
-                  &quot;The analytics capabilities are incredible. Being able to see
-                  real-time engagement metrics has transformed our sales
-                  process.&quot;
+                  &quot;The analytics capabilities are incredible. Being able to see real-time engagement metrics has transformed our sales process.&quot;
                 </p>
               </div>
 
