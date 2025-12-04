@@ -51,6 +51,9 @@ export const createAndStartStream = async (webinar: Webinar) => {
             role: 'host',
           },
         ],
+        custom: {
+          title: webinar.title,
+        },
       },
     })
     call.goLive({

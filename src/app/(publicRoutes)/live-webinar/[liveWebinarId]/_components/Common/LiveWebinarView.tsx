@@ -91,9 +91,10 @@ const LiveWebinarView = ({
         userToken
       )
 
-      const channel = client.channel('livestream', webinar.id, {
-        name: webinar.title,
-      })
+      // const channel = client.channel('livestream', webinar.id, {
+      //   name: webinar.title,
+      // })
+      const channel = client.channel('livestream', webinar.id)
 
       await channel.watch()
 
