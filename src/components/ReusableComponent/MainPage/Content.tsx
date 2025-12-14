@@ -244,7 +244,7 @@ const Content = () => {
               <button className='px-8 py-4 text-lg font-semibold text-white rounded-md bg-gradient-to-r from-purple-600/80 to-blue-600/80 hover:from-purple-600 hover:to-blue-600 transition-all duration-300'>
                 <Link href='/sign-up'>Try Now</Link>
               </button>
-              <Link href='/contact'>
+              <Link href='https://youtu.be/eJZDwK57sfM'>
                 <button className='px-8 py-4 text-lg font-semibold rounded-md text-gray-300 border border-gray-700 hover:border-purple-500/50 hover:text-white transition-all duration-300'>
                   Request Demo
                 </button>
