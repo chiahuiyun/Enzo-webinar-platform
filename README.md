@@ -1,8 +1,10 @@
-# Enzo
+# 💡 Enzo: AI-Powered SaaS Webinar Platform
 
-Enzo is a sophisticated, all-in-one platform for creating, hosting, and monetizing live webinars and virtual events. It leverages a modern tech stack to provide presenters with tools for audience engagement, lead tracking, automated follow-ups, and AI-powered interactions.
+**Elevating Webinars with Conversational AI Sales Agents**
 
-## 🚀 Features
+Enzo is a production-ready Software as a Service (SaaS) application that revolutionizes the webinar experience by integrating advanced Voice AI agents into a seamless streaming platform. It empowers marketers and business owners to automate their sales process by providing dedicated, intelligent AI reps for one-on-one customer interaction during live events.
+
+## ✨ Key Features
 
 Based on the application's structure and data models, Enzo includes the following core functionalities:
 
