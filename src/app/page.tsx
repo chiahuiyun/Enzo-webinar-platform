@@ -220,8 +220,18 @@ export default function HeroGeometric() {
               Crafting exceptional digital experiences through innovative design
               and cutting-edge technology.
             </p>
+            
             <div className='flex items-center justify-center flex-col'>
-
+              <Image
+              src='/dashboard.png'
+              alt='Dashboard'
+              width={1500}
+              height={1500}
+              className='w-full'
+              style={{
+                boxShadow: '0 0 30px rgba(79, 209, 197, 0.2)',
+              }}
+            />
               {/* CTA Section - More professional */}
               <div className='relative bg-black px-4 py-10'>
                 <div className='max-w-5xl mx-auto relative'>
@@ -266,9 +276,7 @@ export default function HeroGeometric() {
             style={{
               marginTop: '20px',
             }}
-          >
-            
-          </motion.div>
+          ></motion.div>
 
           <div>
             <motion.div
