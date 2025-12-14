@@ -4,6 +4,18 @@
 
 Enzo is a production-ready Software as a Service (SaaS) application that revolutionizes the webinar experience by integrating advanced Voice AI agents into a seamless streaming platform. It empowers marketers and business owners to automate their sales process by providing dedicated, intelligent AI reps for one-on-one customer interaction during live events.
 
+
+
+**Home Page**
+
+<img width="1341" height="832" alt="Enzo" src="https://github.com/user-attachments/assets/cede8664-5ff3-4d73-a49c-857dc4181a0c" />
+
+
+**Dashboard Page**
+
+<img width="1632" height="850" alt="image" src="https://github.com/user-attachments/assets/1aa550b1-1d48-4762-a794-d32c95bfe7f1" />
+
+
 ## ✨ Key Features
 
 Based on the application's structure and data models, Enzo includes the following core functionalities:
